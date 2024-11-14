@@ -31,14 +31,14 @@ public abstract class Pokemon {
     * Constructores.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
-    public Pokemon(String nombre, int salud, int puntosDeAtaque, TipoPokemon tipoPokemon, Estado estado, int nivel, int experiencia) {
+    public Pokemon(String nombre, int salud, int puntosDeAtaque, TipoPokemon tipoPokemon, Estado estado) {
         this.nombre = nombre;
         this.salud = salud;
         this.puntosDeAtaque = puntosDeAtaque;
         this.tipoPokemon = tipoPokemon;
         this.estado = estado;
-        this.nivel = nivel;
-        this.experiencia = experiencia;
+        this.nivel = 1;
+        this.experiencia = 0;
     }
 
     
@@ -67,10 +67,11 @@ public abstract class Pokemon {
     */  
     public void recibirDaño(int daño) {
         salud -= daño;
-    //La salud no puede bajar de 0
+        //La salud no puede bajar de 0
         if (salud <= 0) {
-        salud = 0;
-        estado = Estado.DEBILITADO;
+            salud = 0;
+            estado = Estado.DEBILITADO;
+        }
     }
     //Reduce la salud del Pokémon basado en el daño recibido.
 
@@ -82,8 +83,8 @@ public abstract class Pokemon {
     */
 
     public void entrenar() {
-    this.puntosDeAtaque += 5;
-    this.salud += 10;
+        this.puntosDeAtaque += 5;
+        this.salud += 10;
     }
 
     //Mejora las estadísticas del Pokémon.
