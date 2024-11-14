@@ -7,7 +7,7 @@ public class Entrenador {
     // Guarda del nombre entrenador
     private List<Pokemon> pokemones;
     // Lista De pokemones
-
+    //isEmpty es que esta vacia la lista
     // Constructor de la clase.
     public Entrenador(String nombreEntrenador) {
         this.nombreEntrenador = nombreEntrenador;
@@ -55,6 +55,7 @@ public class Entrenador {
             System.out.println("No hay Pokémones en tu equipo para la batalla.");
             return null;
         }
+        //preguntar al profe como hacer para que elija aleatoriamente
         Pokemon pokemonBatalla = pokemones.get(0); // Selecciona el primer Pokémon del equipo en el ArrayList.
         System.out.println(pokemonBatalla.getNombre() + " ha sido seleccionado.");
         return pokemonBatalla;
