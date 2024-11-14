@@ -31,7 +31,7 @@ public abstract class Pokemon {
     * Constructores.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
-    public ClasePokemon(String nombre, int salud, int puntosDeAtaque, TipoPokemon tipoPokemon, Estado estado, int nivel, int experiencia) {
+    public Pokemon(String nombre, int salud, int puntosDeAtaque, TipoPokemon tipoPokemon, Estado estado, int nivel, int experiencia) {
         this.nombre = nombre;
         this.salud = salud;
         this.puntosDeAtaque = puntosDeAtaque;
@@ -80,10 +80,12 @@ public abstract class Pokemon {
     * Método para entrenar a los pokemones. 
     * Complejidad temporal: O(1) Complejidad Constante.
     */
+
     public void entrenar() {
     this.puntosDeAtaque += 5;
     this.salud += 10;
     }
+
     //Mejora las estadísticas del Pokémon.
 
     
