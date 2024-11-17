@@ -1,11 +1,19 @@
 package simulador.entrenador;
+
 import java.util.ArrayList;
 import java.util.List;
 import simulador.pokemon.Pokemon;
+
 public class Entrenador {
+
+
+
     private String nombreEntrenador;
     // Guarda del nombre entrenador
+    private static Entrenador entrenador;
     private List<Pokemon> pokemones;
+    private static List<Entrenador> listaEntrenador = new ArrayList<>();
+
     // Lista De pokemones
     //isEmpty es que esta vacia la lista
     // Constructor de la clase.
@@ -15,6 +23,38 @@ public class Entrenador {
         // Lista vacía de pokemones usando ArrayList.
     }
 
+    public static boolean Vacio() {
+        return listaEntrenador.isEmpty();
+    }
+ // Agregar un nuevo entrenador
+    public static void agregarEntrenador(Entrenador entrenador) {
+        listaEntrenador.add(entrenador);
+    }
+
+
+    // Obtener el tamaño de la lista de entrenadores
+    public static int size() {
+        return listaEntrenador.size();
+    }
+
+    // Obtener un entrenador por su índice
+    public static Entrenador get(int index) {
+        return listaEntrenador.get(index);
+    }
+
+    // Mostrar la lista de entrenadores
+    public static void mostrarEntrenadores() {
+        if (Vacio()) {
+            System.out.println("No hay entrenadores registrados.");
+        } else {
+            System.out.println("Lista de entrenadores:");
+            for (int i = 0; i < size(); i++) {
+                System.out.println((i + 1) + ". " + get(i).getNombreEntrenador());
+            }
+        }
+    }
+
+
     // Método agregarPokemon que agrega un pokémon.
     public void agregarPokemon(Pokemon pokemon) {
         // En los torneos de Play! Pokémon, el equipo de un jugador puede estar formado por un máximo de 6 Pokémon.
@@ -22,7 +62,6 @@ public class Entrenador {
             pokemones.add(pokemon);
         }
     }
-    
 
     // Método que entrena a un pokémon.
     public void entrenarPokemon(Pokemon pokemon) { // Se pasa el Pokémon a entrenar como parámetro.
@@ -50,7 +89,7 @@ public class Entrenador {
     }
 
     // Método que prepara al pokémon para una batalla.
-    public Pokemon prepararBatalla() { 
+    public Pokemon prepararBatalla() {
         if (pokemones.isEmpty()) {
             System.out.println("No hay Pokémones en tu equipo para la batalla.");
             return null;
@@ -62,16 +101,21 @@ public class Entrenador {
     }
 
     //  get de los atributos.
-    public String getNombreEntrenador() { 
+    public String getNombreEntrenador() {
         return nombreEntrenador;
     }
 
-    public List<Pokemon> getPokemones() { 
+
+    public void setNombreEntrenador(String nombreEntrenador) {
+        this.nombreEntrenador = nombreEntrenador;
+    }
+
+    public List<Pokemon> getPokemones() {
         return pokemones;
     }
 
     //  set de la lista de pokemones.
-    public void setPokemones(List<Pokemon> pokemones) { 
+    public void setPokemones(List<Pokemon> pokemones) {
         this.pokemones = pokemones;
     }
 }

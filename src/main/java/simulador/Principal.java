@@ -31,6 +31,7 @@ public class Principal {
             switch (opcion) { // O(1): Comparar un valor con varias opciones es constante.
                 case 1:
                     gestionarEntrenadores(); // Complejidad: O(m), donde m depende de las operaciones realizadas.
+
                     break;
                 case 2:
                     gestionarPokemones(); // Complejidad: O(p), dependiendo de las opciones de Pokémon.
@@ -61,9 +62,11 @@ public class Principal {
             int opcion = sc.nextInt(); // O(1)
             switch (opcion) { // O(1)
                 case 1:
+                    registrarEntrenador();
                 case 2:
+                    verEntrenadores();
                 case 3:
-                    // Implementar lógica, dependiente del caso.
+                    seleccionarEntrenador();
                     break;
                 case 4:
                     return; // Salir del menú.
@@ -116,6 +119,75 @@ public class Principal {
                 default:
                     System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
             }
+        }
+    }
+
+// Registrar un nuevo entrenador desde la entrada del usuario
+    public static void registrarEntrenador() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\n--- CREAR NUEVO ENTRENADOR ---");
+        System.out.print("Introduce el nombre del nuevo entrenador: ");
+        String nombre = sc.nextLine();
+
+        Entrenador nuevoEntrenador = new Entrenador(nombre);
+        Entrenador.agregarEntrenador(nuevoEntrenador);
+
+        System.out.println("Entrenador " + nombre + " ha sido creado y añadido a la lista.");
+    }
+
+
+    private static void verEntrenadores() {
+        if (Entrenador.Vacio()) {
+            System.out.println("No hay entrenadores registrados.");
+            return;
+        }
+
+        System.out.println("Lista de entrenadores:");
+        for (int i = 0; i < Entrenador.size(); i++) {
+            System.out.println((i + 1) + ". " + Entrenador.get(i).getNombreEntrenador());
+        }
+
+        System.out.print("Selecciona un entrenador por su número: ");
+        int opcion = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer
+
+        if (opcion < 1 || opcion > Entrenador.size()) {
+            System.out.println("Opción inválida.");
+        } else {
+            Entrenador entrenadorSeleccionado = Entrenador.get(opcion - 1);
+            System.out.println("Entrenador seleccionado: " + entrenadorSeleccionado.getNombreEntrenador());
+
+            // Llamar a otro método para que el entrenador elija un Pokémon
+            seleccionarPokemon(entrenadorSeleccionado);
+        }
+    }
+
+    private static void seleccionarPokemon(Entrenador entrenador) {
+        if (entrenador.getPokemones().isEmpty()) {
+            System.out.println(entrenador.getNombreEntrenador() + " no tiene Pokémones en su equipo.");
+            return;
+        }
+
+        System.out.println("Lista de Pokémon de " + entrenador.getNombreEntrenador() + ":");
+        List<Pokemon> pokemones = entrenador.getPokemones();
+
+        for (int i = 0; i < pokemones.size(); i++) {
+            Pokemon pokemon = pokemones.get(i);
+            System.out.println((i + 1) + ". " + pokemon.getNombre() + " (Nivel: " + pokemon.getNivel() + ")");
+        }
+
+        System.out.print("Selecciona un Pokémon por su número: ");
+        int opcion = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer
+
+        if (opcion < 1 || opcion > pokemones.size()) {
+            System.out.println("Opción inválida.");
+        } else {
+            Pokemon pokemonSeleccionado = pokemones.get(opcion - 1);
+            System.out.println("Has seleccionado a " + pokemonSeleccionado.getNombre() + " (Nivel: " + pokemonSeleccionado.getNivel() + ").");
+
+            // Aquí puedes realizar más operaciones con el Pokémon seleccionado
         }
     }
 
@@ -192,5 +264,6 @@ public class Principal {
                 return texto;
         }
     }
-}
 
+
+}
