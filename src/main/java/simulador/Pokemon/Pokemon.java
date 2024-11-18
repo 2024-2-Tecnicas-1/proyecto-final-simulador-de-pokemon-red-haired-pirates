@@ -7,6 +7,7 @@ public abstract class Pokemon {
     */
     
     private String nombre;
+    private int saludInicial;
     private int salud;
     private int puntosDeAtaque;
     private TipoPokemon tipoPokemon;
@@ -33,6 +34,7 @@ public abstract class Pokemon {
     */
     public Pokemon(String nombre, int salud, int puntosDeAtaque, TipoPokemon tipoPokemon, Estado estado) {
         this.nombre = nombre;
+        this.saludInicial = salud;
         this.salud = salud;
         this.puntosDeAtaque = puntosDeAtaque;
         this.tipoPokemon = tipoPokemon;
@@ -119,6 +121,15 @@ public abstract class Pokemon {
     }    
     
     
+    public void curar(){
+        this.salud = this.saludInicial;
+    }
+    
+    
+    
+    
+    
+    
     
     /*   
     * Métodos getter.
@@ -183,6 +194,7 @@ public abstract class Pokemon {
     public void setExperiencia(int experiencia) {
         this.experiencia = experiencia;
     }
+    
 
 }
 

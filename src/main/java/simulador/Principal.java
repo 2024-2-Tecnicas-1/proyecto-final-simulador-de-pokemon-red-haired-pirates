@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import simulador.batalla.Batalla;
+import simulador.clinica.Clinica;
 import simulador.entrenador.Entrenador;
 import simulador.pokemon.*;
 
@@ -12,6 +13,8 @@ public class Principal {
     private static Scanner sc = new Scanner(System.in); // O(1): Crear un objeto Scanner es una operación constante.
     private static String idioma = "es"; // O(1): Asignar un valor a una variable es constante.
 
+    private static Clinica clinicaPokemon = new Clinica();
+    
     public static void main(String[] args) {
         seleccionarIdioma(); // Complejidad: O(n), dependiendo del input del usuario.
         mostrarMenuPrincipal(); // Complejidad: O(n), el menú puede ejecutarse indefinidamente.
@@ -25,6 +28,7 @@ public class Principal {
             System.out.println("2. " + tr("Gestionar Pokémones")); // O(1)
             System.out.println("3. " + tr("Iniciar Batalla")); // O(1)
             System.out.println("4. " + tr("Seleccionar Idioma")); // O(1)
+            System.out.println("6. " + tr("Gestionar Clínica")); // O(1)
             System.out.println("5. " + tr("Salir")); // O(1)
             System.out.print(tr("Elige una opción: ")); // O(1)
             int opcion = sc.nextInt(); // O(1): Leer un número del usuario es constante.
@@ -45,6 +49,30 @@ public class Principal {
                 case 5:
                     System.out.println(tr("Cerrando el juego...")); // O(1)
                     return; // Salir del método.
+                case 6:
+                    gestionarClinica();
+                    break;
+                default:
+                    System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
+            }
+        }
+    }
+    
+    private static void gestionarClinica(){
+        while (true) { // Complejidad: O(m), donde m es el número de iteraciones del menú.
+            System.out.println("1. " + tr("Ingresar Paciente")); // O(1)
+            System.out.println("2. " + tr("Gestionar Pacientes")); // O(1)
+            System.out.println("3. " + tr("Curar")); // O(1)
+            System.out.print(tr("Elige una opción: ")); // O(1)
+            int opcion = sc.nextInt(); // O(1)
+            switch (opcion) { // O(1)
+                case 1:
+                    clinicaPokemon.ingresarPaciente(pokemon);
+                    
+                case 2:
+                    clinicaPokemon.gestionarPacientes();
+                case 3:
+                    clinicaPokemon.curar();
                 default:
                     System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
             }
@@ -66,7 +94,7 @@ public class Principal {
                 case 2:
                     verEntrenadores();
                 case 3:
-                    seleccionarEntrenador();
+                    //seleccionarEntrenador();
                     break;
                 case 4:
                     return; // Salir del menú.
@@ -209,7 +237,7 @@ public class Principal {
     // Método para traducir textos
     private static String tr(String texto) {
         switch (idioma) { // O(1), dado que solo compara con un número limitado de opciones.
-            case "en":
+            case "english":
                 return traducirIngles(texto); // O(1), asume que la traducción directa en el switch es constante.
             default:
                 return texto; // O(1)
