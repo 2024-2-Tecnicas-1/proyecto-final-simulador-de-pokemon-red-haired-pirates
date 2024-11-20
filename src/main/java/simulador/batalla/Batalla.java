@@ -8,10 +8,10 @@ public class Batalla {
     * Atributos.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
+    private Pokemon pokemon1;
+    private Pokemon pokemon2;
 
     private int turnoActual;
-    private Pokemon atacante;
-    private Pokemon defensor;
     private boolean seguir; 
 
      /*
@@ -30,11 +30,11 @@ public class Batalla {
     
     public void iniciarBatalla(Pokemon pokemon1, Pokemon pokemon2) {
         this.turnoActual = 1; 
-        this.atacante = pokemon1;
-        this.defensor = pokemon2;
+        this.pokemon1 = pokemon1;
+        this.pokemon2 = pokemon2;
         this.seguir = true; 
 
-        System.out.println("¡Inicia la batalla entre " + atacante.getNombre() + " y " + defensor.getNombre() + "!");
+        System.out.println("¡Inicia la batalla entre " + pokemon1.getNombre() + " y " + pokemon2.getNombre() + "!");
 
 
 
@@ -54,10 +54,10 @@ public class Batalla {
     * Complejidad temporal: O(1) Complejidad Constante.
     */ 
 
-        if (atacante.getSalud() > 0) {
-            System.out.println(defensor.getNombre() + " ha sido derrotado. " + atacante.getNombre() + " gana la batalla.");
+        if (pokemon1.getSalud() > 0) {
+            System.out.println(pokemon1.getNombre() + " ha sido derrotado. " + pokemon2.getNombre() + " gana la batalla.");
         } else {
-            System.out.println(atacante.getNombre() + " ha sido derrotado. " + defensor.getNombre() + " gana la batalla.");
+            System.out.println(pokemon2.getNombre() + " ha sido derrotado. " + pokemon1.getNombre() + " gana la batalla.");
         }
     }
 
@@ -70,8 +70,8 @@ public class Batalla {
     */
 
     private void avanzarTurno() {
-        atacante.atacar(defensor);
-        System.out.println(atacante.getNombre() + " ataca a " + defensor.getNombre() + ". Salud de " + defensor.getNombre() + ": " + defensor.getSalud());
+        pokemon1.atacar(pokemon2);
+        System.out.println(pokemon1.getNombre() + " ataca a " + pokemon2.getNombre() + ". Salud de " + pokemon2.getNombre() + ": " + pokemon2.getSalud());
 
 
 
@@ -80,7 +80,7 @@ public class Batalla {
     * Complejidad temporal: O(1) Complejidad Constante.
     */
 
-        if (defensor.getSalud() <= 0) {
+        if (pokemon2.getSalud() <= 0) {
             seguir = false;       
         }
 
@@ -91,8 +91,8 @@ public class Batalla {
     * Complejidad temporal: O(1) Complejidad Constante.
     */
 
-        Pokemon temp = atacante; // Se guarda el valor de "atacante" en una variable temporal llamada temp.
-        atacante = defensor;    // Atacante recibe el valor de defensor.
-        defensor = temp;       //Defensor recibe el valor guardado en temp, es decir, el valor original de atacante)
+        Pokemon temp = pokemon1; // Se guarda el valor de "atacante" en una variable temporal llamada temp.
+        pokemon1 = pokemon2;    // Atacante recibe el valor de defensor.
+        pokemon2 = temp;       //Defensor recibe el valor guardado en temp, es decir, el valor original de atacante)
     }
 }
