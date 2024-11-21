@@ -58,7 +58,7 @@ public class Entrenador {
     // Método agregarPokemon que agrega un pokémon.
     public void agregarPokemon(Pokemon pokemon) {
         // En los torneos de Play! Pokémon, el equipo de un jugador puede estar formado por un máximo de 6 Pokémon.
-        if (pokemones.size() <= 6) {
+        if (pokemones.size() < 6) {
             pokemones.add(pokemon);
         }
     }
