@@ -79,6 +79,7 @@ public class Entrenador {
         if (pokemones.isEmpty()) {
             System.out.println("No tienes Pokémones en tu equipo.");
         } else {
+            String nombreEntrenador = null;
             System.out.println("Pokémones de " + nombreEntrenador + ":");
 
             // Un bucle para todos los elementos de la lista pokemones, imprime el nombre y el nivel de cada Pokemon.
