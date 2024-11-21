@@ -10,7 +10,6 @@ public class Batalla {
     */
     private Pokemon pokemon1;
     private Pokemon pokemon2;
-
     private int turnoActual;
     private boolean seguir; 
 
@@ -29,6 +28,11 @@ public class Batalla {
     */ 
     
     public void iniciarBatalla(Pokemon pokemon1, Pokemon pokemon2) {
+        //Se agregó una excepción en caso de que no hayan pokemones
+        if (pokemon1 == null || pokemon2 == null) {
+            throw new IllegalArgumentException("Ambos Pokémon deben ser válidos para iniciar batalla.");
+        }
+
         this.turnoActual = 1; 
         this.pokemon1 = pokemon1;
         this.pokemon2 = pokemon2;
@@ -82,17 +86,15 @@ public class Batalla {
 
         if (pokemon2.getSalud() <= 0) {
             seguir = false;       
-        }
-
-
-
+        }else {
     /**
     * Cambia los roles.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
-
         Pokemon temp = pokemon1; // Se guarda el valor de "atacante" en una variable temporal llamada temp.
         pokemon1 = pokemon2;    // Atacante recibe el valor de defensor.
         pokemon2 = temp;       //Defensor recibe el valor guardado en temp, es decir, el valor original de atacante)
+ 
+        }
     }
 }

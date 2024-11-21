@@ -197,13 +197,3 @@ public abstract class Pokemon {
     
 
 }
-
-/*
-* Cosas para añadir o mejorar a futuro del código:
-*
-* 1. Que nivel y experiencia directamente siempre inicien como 1 y 0 respectivamente.
-* 2. Que en una interfaz gráfica al subir de nivel la imágen también cambie.
-* 3. Que no se pierdan los puntos de experiencia extra al subir de nivel.
-* 4. Añadir más estados.
-* 5. Método curar.
-*/

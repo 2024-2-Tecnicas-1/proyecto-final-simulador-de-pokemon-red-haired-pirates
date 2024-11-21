@@ -15,10 +15,23 @@ public class Clinica {
 
     }
     
-    public void ingresarPaciente(Pokemon pokemon){
-        pacientes.add(pokemon);
-        
+    public void ingresarPaciente(String nombrePokemon, List<Entrenador> entrenadores) {
+        for (Entrenador entrenador : entrenadores) {
+            for (Pokemon pokemon : entrenador.getPokemones()) {
+                if (pokemon.getNombre().equals(nombrePokemon)) {
+                    if (pacientes.contains(pokemon)) {
+                        System.out.println(pokemon.getNombre() + " ya está ingresado en la clínica.");
+                        return;
+                    }
+                    pacientes.add(pokemon);
+                    System.out.println("Pokémon " + pokemon.getNombre() + " ingresado a la clínica.");
+                    return;
+                }
+            }
+        }
+        System.out.println("Pokémon no encontrado en los equipos de los entrenadores.");
     }
+
     public void curar() {
         for (Pokemon paciente : pacientes) {
             paciente.curar();
