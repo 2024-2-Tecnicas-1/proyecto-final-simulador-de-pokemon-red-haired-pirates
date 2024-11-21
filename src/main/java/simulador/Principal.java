@@ -59,19 +59,27 @@ public class Principal {
 
     private static void gestionarClinica() {
         while (true) { // Complejidad: O(m), donde m es el número de iteraciones del menú.
-            System.out.println("1. " + tr("Ingresar Paciente")); // O(1)
-            System.out.println("2. " + tr("Gestionar Pacientes")); // O(1)
-            System.out.println("3. " + tr("Curar")); // O(1)
+            System.out.println("1. " + tr("1. Ingresar Paciente")); // O(1)
+            System.out.println("2. " + tr("2. Gestionar Pacientes")); // O(1)
+            System.out.println("3. " + tr("3. Curar")); // O(1)
+            System.out.println("4. " + tr("4. Volver al menú principal")); // O(1)
             System.out.print(tr("Elige una opción: ")); // O(1)
             int opcion = sc.nextInt(); // O(1)
             switch (opcion) { // O(1)
                 case 1:
-                    clinicaPokemon.ingresarPaciente(pokemon);
+                    System.out.print("Introduce el nombre del Pokémon a ingresar: ");
+                    String nombrePokemon = sc.next(); // Captura el nombre introducido
+                    clinicaPokemon.ingresarPaciente(nombrePokemon);
+                    break;
 
                 case 2:
                     clinicaPokemon.gestionarPacientes();
+                    break;
                 case 3:
                     clinicaPokemon.curar();
+                    break;
+                case 4:
+                    return;
                 default:
                     System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
             }
@@ -90,10 +98,12 @@ public class Principal {
             switch (opcion) { // O(1)
                 case 1:
                     registrarEntrenador();
+                    break;
                 case 2:
-                    verEntrenadores();
+                    mostrarEntrenadores();
+                    break;
                 case 3:
-                    
+
                     seleccionarEntrenador();
                     break;
                 case 4:
@@ -103,23 +113,24 @@ public class Principal {
             }
         }
     }
-private static void seleccionarEntrenador() { // O(1)
-    if (Entrenador.Vacio()) { // Verifica si no hay entrenadores registrados
-        System.out.println("No hay entrenadores registrados.");
-    } else {
-        verEntrenadores(); // Lista a todos los entrenadores
 
-        System.out.print("Selecciona un entrenador por número: ");
-        int numEntrenador = sc.nextInt() - 1; // Resta 1 para que coincida con los índices de la lista
-
-        if (numEntrenador >= 0 && numEntrenador < Entrenador.size()) { 
-            Entrenador entrenadorSeleccionado = Entrenador.get(numEntrenador); // Obtén el entrenador seleccionado
-            gestionarEquipo(entrenadorSeleccionado); // Llama al método para gestionar el equipo del entrenador
+    private static void seleccionarEntrenador() { // O(1)
+        if (Entrenador.Vacio()) { // Verifica si no hay entrenadores registrados
+            System.out.println("No hay entrenadores registrados.");
         } else {
-            System.out.println("Número de entrenador no válido.");
+            verEntrenadores(); // Lista a todos los entrenadores
+
+            System.out.print("Selecciona un entrenador por número: ");
+            int numEntrenador = sc.nextInt() - 1; // Resta 1 para que coincida con los índices de la lista
+
+            if (numEntrenador >= 0 && numEntrenador < Entrenador.size()) {
+                Entrenador entrenadorSeleccionado = Entrenador.get(numEntrenador); // Obtén el entrenador seleccionado
+                gestionarEquipo(entrenadorSeleccionado); // Llama al método para gestionar el equipo del entrenador
+            } else {
+                System.out.println("Número de entrenador no válido.");
+            }
         }
     }
-}
 
     // Método para gestionar Pokémon
     private static void gestionarPokemones() {
@@ -130,6 +141,7 @@ private static void seleccionarEntrenador() { // O(1)
         int opcion = sc.nextInt(); // O(1)
         switch (opcion) { // O(1)
             case 1:
+                break;
             case 2:
                 // Implementar lógica específica.
                 break;
@@ -166,97 +178,100 @@ private static void seleccionarEntrenador() { // O(1)
             }
         }
     }
-     private static void gestionarEquipo(Entrenador entrenador) { //O(1)
-        
-        while (true) { 
+
+    private static void gestionarEquipo(Entrenador entrenador) { //O(1)
+
+        while (true) {
             System.out.println("--GESTIONAR EQUIPO--");
-            System.out.println("Gestionar equipo de " + entrenador.getNombre()); 
-            System.out.println("1. Ver equipo de Pokémones"); 
-            System.out.println("2. Agregar Pokémon al equipo"); 
-            System.out.println("3. Entrenar Pokémon"); 
-            System.out.println("4. Volver a Gestionar Entrenadores"); 
-            String opcion = lector.next(); 
+            System.out.println("Gestionar equipo de " + entrenador.getNombre());
+            System.out.println("1. Ver equipo de Pokémones");
+            System.out.println("2. Agregar Pokémon al equipo");
+            System.out.println("3. Entrenar Pokémon");
+            System.out.println("4. Volver a Gestionar Entrenadores");
+            String opcion = sc.next();
 
-            switch (opcion) { 
-                
-                case "1": 
-                    verEquipo(entrenador); 
-                    break; 
-                case "2": 
-                    agregarPokemonAlEquipo(entrenador); 
-                    break; 
-                case "3": 
+            switch (opcion) {
+
+                case "1":
+                    verEquipo(entrenador);
+                    break;
+                case "2":
+                    agregarPokemonAlEquipo(entrenador);
+                    break;
+                case "3":
                     entrenarPokemon(entrenador);
-                    break; 
-                case "4": 
-                    return; 
-                default: 
-                    System.out.println("Opción no válida, por favor intenta de nuevo."); 
-                    
-            } 
-        } 
-     }
-         private static void verEquipo(Entrenador entrenador) { //Complejidad lineal O(N) porque contiene un ciclo for.
-        
-        List<Pokemon> equipo = entrenador.getPokemones(); 
-        if (equipo.isEmpty()) { 
-            System.out.println("El equipo está vacío."); 
-        } else { 
-            for (Pokemon pokemon : equipo) { 
-                System.out.println(pokemon.getNombre()); 
-            } 
-        } 
-        
-    }
-         private static void agregarPokemonAlEquipo(Entrenador entrenador) { //O(N)
-        
-        System.out.println("Agregar un nuevo Pokémon al equipo de " + entrenador.getNombre()); 
-        
-        for (int i = 0; i < pokemones.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
-            Pokemon pokemon = pokemones.get(i); 
-            System.out.println((i + 1) + ". " + pokemon.getNombre() + " (Tipo: " + pokemon.getTipoPokemon() + ", Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")"); 
-        } 
-        
-        System.out.print("Selecciona un Pokémon por número: "); 
-        int numPokemon = sc.nextInt() - 1; 
+                    break;
+                case "4":
+                    return;
+                default:
+                    System.out.println("Opción no válida, por favor intenta de nuevo.");
 
-        if (numPokemon >= 0 && numPokemon < pokemones.size()) { 
-            entrenador.getPokemones().add(pokemones.get(numPokemon)); 
-            System.out.println("Pokémon añadido al equipo."); 
-        } else { 
-            System.out.println("Número de Pokémon no válido."); 
-        } 
-        
-    } 
-     
- private static void entrenarPokemon(Entrenador entrenador) { 
-    List<Pokemon> equipo = entrenador.getPokemones(); 
-    if (equipo.isEmpty()) { //Para saber si la lista equipo esta vacía equipo.isEmpty.
-        System.out.println("El equipo de Pokémon está vacío"); 
-        
-    }else{ 
-        
-        System.out.println("Selecciona el Pokémon que deseas entrenar:"); 
-
-    for (int i = 0; i < equipo.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
-        Pokemon pokemon = equipo.get(i); 
-        System.out.println((i + 1) + "." + pokemon.getNombre() + " (Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")");
-    }
-
-    System.out.print("Selecciona el número del Pokémon a entrenar: "); 
-    int numPokemonEntrenar = sc.nextInt() - 1; 
-
-    if (numPokemonEntrenar >= 0 && numPokemonEntrenar < equipo.size()) { 
-        Pokemon pokemonSeleccionado = equipo.get(numPokemonEntrenar); 
-        pokemonSeleccionado.entrenar(); 
-        System.out.println(pokemonSeleccionado.getNombre() + " ha sido entrenado. salud nueva: " + pokemonSeleccionado.getSalud() + ", ataque nuevo: " + pokemonSeleccionado.getPuntosDeAtaque()); 
-    } else 
-        { 
-            System.out.println("Número de Pokémon no válido."); 
+            }
         }
     }
-}
+
+    private static void verEquipo(Entrenador entrenador) { //Complejidad lineal O(N) porque contiene un ciclo for.
+
+        List<Pokemon> equipo = entrenador.getPokemones();
+        if (equipo.isEmpty()) {
+            System.out.println("El equipo está vacío.");
+        } else {
+            for (Pokemon pokemon : equipo) {
+                System.out.println(pokemon.getNombre());
+            }
+        }
+
+    }
+
+    private static void agregarPokemonAlEquipo(Entrenador entrenador) { //O(N)
+
+        System.out.println("Agregar un nuevo Pokémon al equipo de " + entrenador.getNombre());
+
+        for (int i = 0; i < pokemon.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
+            Pokemon pokemon = pokemon.get(i);
+            System.out.println((i + 1) + ". " + pokemon.getNombre() + " (Tipo: " + pokemon.getTipoPokemon() + ", Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")");
+        }
+
+        System.out.print("Selecciona un Pokémon por número: ");
+        int numPokemon = sc.nextInt() - 1;
+
+        if (numPokemon >= 0 && numPokemon < pokemones.size()) {
+            entrenador.getPokemones().add(pokemones.get(numPokemon));
+            System.out.println("Pokémon añadido al equipo.");
+        } else {
+            System.out.println("Número de Pokémon no válido.");
+        }
+
+    }
+
+    private static void entrenarPokemon(Entrenador entrenador) {
+        List<Pokemon> equipo = entrenador.getPokemones();
+        if (equipo.isEmpty()) { //Para saber si la lista equipo esta vacía equipo.isEmpty.
+            System.out.println("El equipo de Pokémon está vacío");
+
+        } else {
+
+            System.out.println("Selecciona el Pokémon que deseas entrenar:");
+
+            for (int i = 0; i < equipo.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
+                Pokemon pokemon = equipo.get(i);
+                System.out.println((i + 1) + "." + pokemon.getNombre() + " (Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")");
+            }
+
+            System.out.print("Selecciona el número del Pokémon a entrenar: ");
+            int numPokemonEntrenar = sc.nextInt() - 1;
+
+            if (numPokemonEntrenar >= 0 && numPokemonEntrenar < equipo.size()) {
+                Pokemon pokemonSeleccionado = equipo.get(numPokemonEntrenar);
+                pokemonSeleccionado.entrenar();
+                System.out.println(pokemonSeleccionado.getNombre() + " ha sido entrenado. salud nueva: " + pokemonSeleccionado.getSalud() + ", ataque nuevo: " + pokemonSeleccionado.getPuntosDeAtaque());
+            } else {
+                System.out.println("Número de Pokémon no válido.");
+            }
+        }
+    }
 // Registrar un nuevo entrenador desde la entrada del usuario
+
     public static void registrarEntrenador() {
         Scanner sc = new Scanner(System.in);
 

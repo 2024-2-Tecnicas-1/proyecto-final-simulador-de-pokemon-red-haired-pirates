@@ -5,55 +5,48 @@ import java.util.List;
 import simulador.pokemon.Pokemon;
 
 public class Entrenador {
-
-
-
-    private String nombreEntrenador;
-    // Guarda del nombre entrenador
-    private static Entrenador entrenador;
+private String nombre;
     private List<Pokemon> pokemones;
-    private static List<Entrenador> listaEntrenador = new ArrayList<>();
+    private static List<Entrenador> entrenadores = new ArrayList<>();
 
-    // Lista De pokemones
-    //isEmpty es que esta vacia la lista
-    // Constructor de la clase.
-    public Entrenador(String nombreEntrenador) {
-        this.nombreEntrenador = nombreEntrenador;
+    // Constructor
+    public Entrenador(String nombre) {
+        this.nombre = nombre;
         this.pokemones = new ArrayList<>();
-        // Lista vacía de pokemones usando ArrayList.
     }
 
-    public static boolean Vacio() {
-        return listaEntrenador.isEmpty();
-    }
- // Agregar un nuevo entrenador
+    // Métodos para gestionar entrenadores
     public static void agregarEntrenador(Entrenador entrenador) {
-        listaEntrenador.add(entrenador);
+        entrenadores.add(entrenador);
     }
 
-
-    // Obtener el tamaño de la lista de entrenadores
-    public static int size() {
-        return listaEntrenador.size();
-    }
-
-    // Obtener un entrenador por su índice
-    public static Entrenador get(int index) {
-        return listaEntrenador.get(index);
-    }
-
-    // Mostrar la lista de entrenadores
     public static void mostrarEntrenadores() {
-        if (Vacio()) {
+        if (entrenadores.isEmpty()) {
             System.out.println("No hay entrenadores registrados.");
         } else {
-            System.out.println("Lista de entrenadores:");
-            for (int i = 0; i < size(); i++) {
-                System.out.println((i + 1) + ". " + get(i).getNombreEntrenador());
+            System.out.println("\n--- LISTA DE ENTRENADORES ---");
+            for (int i = 0; i < entrenadores.size(); i++) {
+                System.out.println((i + 1) + ". " + entrenadores.get(i).getNombreEntrenador());
             }
         }
     }
 
+    public static boolean Vacio() {
+        return entrenadores.isEmpty();
+    }
+
+    public static int size() {
+        return entrenadores.size();
+    }
+
+    public static Entrenador get(int index) {
+        return entrenadores.get(index);
+    }
+
+    // Métodos relacionados con el entrenador
+    public String getNombreEntrenador() {
+        return nombre;
+    }
 
     // Método agregarPokemon que agrega un pokémon.
     public void agregarPokemon(Pokemon pokemon) {
@@ -100,15 +93,7 @@ public class Entrenador {
         return pokemonBatalla;
     }
 
-    //  get de los atributos.
-    public String getNombreEntrenador() {
-        return nombreEntrenador;
-    }
 
-
-    public void setNombreEntrenador(String nombreEntrenador) {
-        this.nombreEntrenador = nombreEntrenador;
-    }
 
     public List<Pokemon> getPokemones() {
         return pokemones;
@@ -118,4 +103,5 @@ public class Entrenador {
     public void setPokemones(List<Pokemon> pokemones) {
         this.pokemones = pokemones;
     }
+
 }
