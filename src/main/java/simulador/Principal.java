@@ -10,364 +10,247 @@ import simulador.pokemon.*;
 
 public class Principal {
 
-    private static Scanner sc = new Scanner(System.in); // O(1): Crear un objeto Scanner es una operación constante.
-    private static String idioma = "es"; // O(1): Asignar un valor a una variable es constante.
-    private static Clinica clinicaPokemon = new Clinica();
+    private static Scanner sc = new Scanner(System.in);
+    private static String idioma = "es";
+    private static List<Entrenador> entrenadores = new ArrayList<>();
 
     public static void main(String[] args) {
-        seleccionarIdioma(); // Complejidad: O(n), dependiendo del input del usuario.
-        mostrarMenuPrincipal(); // Complejidad: O(n), el menú puede ejecutarse indefinidamente.
+        seleccionarIdioma();
+        mostrarMenuPrincipal();
     }
 
     // Método para mostrar el menú principal
     private static void mostrarMenuPrincipal() {
-        while (true) { // Complejidad: O(n), donde n es el número de iteraciones hasta que se elige salir.
-            System.out.println(tr("Bienvenido al simulador de batallas Pokémon")); // O(1)
-            System.out.println("1. " + tr("Gestionar Entrenadores")); // O(1)
-            System.out.println("2. " + tr("Gestionar Pokémones")); // O(1)
-            System.out.println("3. " + tr("Iniciar Batalla")); // O(1)
-            System.out.println("4. " + tr("Seleccionar Idioma")); // O(1)
-            System.out.println("5. " + tr("Gestionar Clínica")); // O(1)
-            System.out.println("6. " + tr("Salir")); // O(1)
-            System.out.print(tr("Elige una opción: ")); // O(1)
-            int opcion = sc.nextInt(); // O(1): Leer un número del usuario es constante.
-            switch (opcion) { // O(1): Comparar un valor con varias opciones es constante.
+        while (true) {
+            System.out.println(tr("Bienvenido al simulador de batallas Pokémon"));
+            System.out.println("1. " + tr("Gestionar Entrenadores"));
+            System.out.println("2. " + tr("Gestionar Pokémones"));
+            System.out.println("3. " + tr("Iniciar Batalla"));
+            System.out.println("4. " + tr("Seleccionar Idioma"));
+            System.out.println("5. " + tr("Salir"));
+            System.out.print(tr("Elige una opción: "));
+            int opcion = sc.nextInt();
+            switch (opcion) {
                 case 1:
-                    gestionarEntrenadores(); // Complejidad: O(m), donde m depende de las operaciones realizadas.
-
+                    gestionarEntrenadores();
                     break;
                 case 2:
-                    gestionarPokemones(); // Complejidad: O(p), dependiendo de las opciones de Pokémon.
+                    gestionarPokemones();
                     break;
                 case 3:
-                    iniciarBatalla(); // Complejidad: O(b), donde b depende de la lógica implementada.
+                    iniciarBatalla();
                     break;
                 case 4:
-                    seleccionarIdioma(); // Complejidad: O(n), dependiendo del input del usuario.
+                    seleccionarIdioma();
                     break;
                 case 5:
-                    System.out.println(tr("Cerrando el juego...")); // O(1)
-                    return; // Salir del método.
-                case 6:
-                    gestionarClinica();
-                    break;
-                default:
-                    System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
-            }
-        }
-    }
-
-    private static void gestionarClinica() {
-        while (true) { // Complejidad: O(m), donde m es el número de iteraciones del menú.
-            System.out.println("1. " + tr("1. Ingresar Paciente")); // O(1)
-            System.out.println("2. " + tr("2. Gestionar Pacientes")); // O(1)
-            System.out.println("3. " + tr("3. Curar")); // O(1)
-            System.out.println("4. " + tr("4. Volver al menú principal")); // O(1)
-            System.out.print(tr("Elige una opción: ")); // O(1)
-            int opcion = sc.nextInt(); // O(1)
-            switch (opcion) { // O(1)
-                case 1:
-                    System.out.print("Introduce el nombre del Pokémon a ingresar: ");
-                    String nombrePokemon = sc.next(); // Captura el nombre introducido
-                    clinicaPokemon.ingresarPaciente(nombrePokemon);
-                    break;
-
-                case 2:
-                    clinicaPokemon.gestionarPacientes();
-                    break;
-                case 3:
-                    clinicaPokemon.curar();
-                    break;
-                case 4:
+                    System.out.println(tr("Cerrando el juego..."));
                     return;
                 default:
-                    System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
+                    System.out.println(tr("Opción no válida. Intenta nuevamente."));
             }
         }
     }
 
     // Método para gestionar entrenadores
     private static void gestionarEntrenadores() {
-        while (true) { // Complejidad: O(m), donde m es el número de iteraciones del menú.
-            System.out.println("1. " + tr("Registrar nuevo entrenador")); // O(1)
-            System.out.println("2. " + tr("Ver lista de entrenadores")); // O(1)
-            System.out.println("3. " + tr("Seleccionar un entrenador")); // O(1)
-            System.out.println("4. " + tr("Volver al menú principal")); // O(1)
-            System.out.print(tr("Elige una opción: ")); // O(1)
-            int opcion = sc.nextInt(); // O(1)
-            switch (opcion) { // O(1)
+        while (true) {
+            System.out.println("1. " + tr("Registrar nuevo entrenador"));
+            System.out.println("2. " + tr("Ver lista de entrenadores"));
+            System.out.println("3. " + tr("Seleccionar un entrenador"));
+            System.out.println("4. " + tr("Volver al menú principal"));
+            System.out.print(tr("Elige una opción: "));
+            int opcion = sc.nextInt();
+            switch (opcion) {
                 case 1:
                     registrarEntrenador();
                     break;
                 case 2:
-                    mostrarEntrenadores();
+                    verListaEntrenadores();
                     break;
                 case 3:
-
-                    seleccionarEntrenador();
+                    // Implementar lógica para seleccionar un entrenador
                     break;
                 case 4:
-                    return; // Salir del menú.
+                    return; // Salir del menú
                 default:
-                    System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
+                    System.out.println(tr("Opción no válida. Intenta nuevamente."));
             }
         }
     }
 
-    private static void seleccionarEntrenador() { // O(1)
-        if (Entrenador.Vacio()) { // Verifica si no hay entrenadores registrados
-            System.out.println("No hay entrenadores registrados.");
+    // Método para registrar un nuevo entrenador
+    private static void registrarEntrenador() {
+        System.out.print(tr("Introduce el nombre del entrenador: "));
+        String nombre = sc.next();
+        Entrenador nuevoEntrenador = new Entrenador(nombre);
+        entrenadores.add(nuevoEntrenador);
+        System.out.println(tr("Entrenador registrado con éxito."));
+    }
+
+    // Método para ver la lista de entrenadores
+    private static void verListaEntrenadores() {
+        if (entrenadores.isEmpty()) {
+            System.out.println(tr("No hay entrenadores registrados."));
         } else {
-            verEntrenadores(); // Lista a todos los entrenadores
-
-            System.out.print("Selecciona un entrenador por número: ");
-            int numEntrenador = sc.nextInt() - 1; // Resta 1 para que coincida con los índices de la lista
-
-            if (numEntrenador >= 0 && numEntrenador < Entrenador.size()) {
-                Entrenador entrenadorSeleccionado = Entrenador.get(numEntrenador); // Obtén el entrenador seleccionado
-                gestionarEquipo(entrenadorSeleccionado); // Llama al método para gestionar el equipo del entrenador
-            } else {
-                System.out.println("Número de entrenador no válido.");
+            System.out.println(tr("Lista de entrenadores:"));
+            for (Entrenador entrenador : entrenadores) {
+                System.out.println("- " + entrenador.getNombreEntrenador());
             }
         }
     }
 
     // Método para gestionar Pokémon
     private static void gestionarPokemones() {
-        System.out.println("1. " + tr("Ver todos los Pokémon registrados")); // O(1)
-        System.out.println("2. " + tr("Registrar nuevo Pokémon")); // O(1)
-        System.out.println("3. " + tr("Volver al menú principal")); // O(1)
-        System.out.print(tr("Elige una opción: ")); // O(1)
-        int opcion = sc.nextInt(); // O(1)
-        switch (opcion) { // O(1)
+        while (true) {
+            System.out.println("1. " + tr("Ver todos los Pokémon registrados"));
+            System.out.println("2. " + tr("Registrar nuevo Pokémon"));
+            System.out.println("3. " + tr("Volver al menú principal"));
+            System.out.print(tr("Elige una opción: "));
+            int opcion = sc.nextInt();
+            switch (opcion) {
+                case 1:
+                    verPokemonesRegistrados();
+                    break;
+                case 2:
+                    registrarPokemon();
+                    break;
+                case 3:
+                    return; // Salir del método
+                default:
+                    System.out.println(tr("Opción no válida."));
+            }
+        }
+    }
+
+    // Método para ver Pokémon registrados
+    private static void verPokemonesRegistrados() {
+        System.out.println(tr("Lista de Pokémon registrados:"));
+        for (Entrenador entrenador : entrenadores) {
+            entrenador.mostrarPokemones();
+        }
+    }
+
+    // Método para registrar un nuevo Pokémon
+    private static void registrarPokemon() {
+        System.out.println("Selecciona el tipo de Pokémon a registrar:");
+        System.out.println("1. Pikachu");
+        System.out.println("2. Charmander");
+        System.out.println("3. Drowzee");
+        System.out.println("4. Articuno");
+        System.out.println("5. Bulbasaur");
+        System.out.println("6. Squirtle");
+        System.out.println("7. Jigglypuff");
+        System.out.println("8. Meowth");
+        System.out.print("Elige una opción: ");
+        int opcion = sc.nextInt();
+        Pokemon nuevoPokemon = null;
+        switch (opcion) {
             case 1:
+                nuevoPokemon = new Caterpie();
                 break;
             case 2:
-                // Implementar lógica específica.
+                nuevoPokemon = new Charmander();
                 break;
             case 3:
-                return; // Salir del método.
+                nuevoPokemon = new Drowzee();
+                break;
+            case 4:
+                nuevoPokemon = new Articuno();
+                break;
+            case 5:
+                nuevoPokemon = new Diglett();
+                break;
+            case 6:
+                nuevoPokemon = new Hitmonlee();
+                break;
+            case 7:
+                nuevoPokemon = new Jolteon();
+                break;
+            case 8:
+                nuevoPokemon = new Shellder();
+                break;
             default:
-                System.out.println(tr("Opción no válida.")); // O(1)
+                System.out.println(tr("Opción no válida."));
+                return;
+        }
+
+        System.out.print(tr("Introduce el nombre del Pokémon: "));
+        String nombre = sc.next();
+        nuevoPokemon.setNombre(nombre);
+
+        // Asumiendo que cada entrenador tiene una lista de Pokémon
+        if (!entrenadores.isEmpty()) {
+            System.out.print(tr("Selecciona el entrenador para el Pokémon: "));
+            verListaEntrenadores();
+            int indexEntrenador = sc.nextInt() - 1;
+            if (indexEntrenador >= 0 && indexEntrenador < entrenadores.size()) {
+                entrenadores.get(indexEntrenador).agregarPokemon(nuevoPokemon);
+                System.out.println(tr("Pokémon registrado con éxito."));
+            } else {
+                System.out.println(tr("Entrenador no válido."));
+            }
+        } else {
+            System.out.println(tr("No hay entrenadores registrados. Registra un entrenador primero."));
         }
     }
 
     // Método para iniciar batalla
     private static void iniciarBatalla() {
-        while (true) { // Complejidad: O(b), donde b es el número de iteraciones del menú.
-            System.out.println("1. " + tr("Elegir entrenador uno")); // O(1)
-            System.out.println("2. " + tr("Elegir entrenador dos")); // O(1)
-            System.out.println("3. " + tr("Seleccionar Pokémon de entrenador uno")); // O(1)
-            System.out.println("4. " + tr("Seleccionar Pokémon de entrenador dos")); // O(1)
-            System.out.println("5. " + tr("Comenzar Batalla")); // O(1)
-            System.out.println("6. " + tr("Volver al menú principal")); // O(1)
-            System.out.print(tr("Elige una opción: ")); // O(1)
-            int opcion = sc.nextInt(); // O(1)
-            switch (opcion) { // O(1)
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                    // Implementar lógica específica.
-                    break;
-                case 6:
-                    return; // Salir del método.
-                default:
-                    System.out.println(tr("Opción no válida. Intenta nuevamente.")); // O(1)
-            }
-        }
-    }
-
-    private static void gestionarEquipo(Entrenador entrenador) { //O(1)
-
-        while (true) {
-            System.out.println("--GESTIONAR EQUIPO--");
-            System.out.println("Gestionar equipo de " + entrenador.getNombre());
-            System.out.println("1. Ver equipo de Pokémones");
-            System.out.println("2. Agregar Pokémon al equipo");
-            System.out.println("3. Entrenar Pokémon");
-            System.out.println("4. Volver a Gestionar Entrenadores");
-            String opcion = sc.next();
-
-            switch (opcion) {
-
-                case "1":
-                    verEquipo(entrenador);
-                    break;
-                case "2":
-                    agregarPokemonAlEquipo(entrenador);
-                    break;
-                case "3":
-                    entrenarPokemon(entrenador);
-                    break;
-                case "4":
-                    return;
-                default:
-                    System.out.println("Opción no válida, por favor intenta de nuevo.");
-
-            }
-        }
-    }
-
-    private static void verEquipo(Entrenador entrenador) { //Complejidad lineal O(N) porque contiene un ciclo for.
-
-        List<Pokemon> equipo = entrenador.getPokemones();
-        if (equipo.isEmpty()) {
-            System.out.println("El equipo está vacío.");
-        } else {
-            for (Pokemon pokemon : equipo) {
-                System.out.println(pokemon.getNombre());
-            }
-        }
-
-    }
-
-    private static void agregarPokemonAlEquipo(Entrenador entrenador) { //O(N)
-
-        System.out.println("Agregar un nuevo Pokémon al equipo de " + entrenador.getNombre());
-
-        for (int i = 0; i < pokemon.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
-            Pokemon pokemon = pokemon.get(i);
-            System.out.println((i + 1) + ". " + pokemon.getNombre() + " (Tipo: " + pokemon.getTipoPokemon() + ", Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")");
-        }
-
-        System.out.print("Selecciona un Pokémon por número: ");
-        int numPokemon = sc.nextInt() - 1;
-
-        if (numPokemon >= 0 && numPokemon < pokemones.size()) {
-            entrenador.getPokemones().add(pokemones.get(numPokemon));
-            System.out.println("Pokémon añadido al equipo.");
-        } else {
-            System.out.println("Número de Pokémon no válido.");
-        }
-
-    }
-
-    private static void entrenarPokemon(Entrenador entrenador) {
-        List<Pokemon> equipo = entrenador.getPokemones();
-        if (equipo.isEmpty()) { //Para saber si la lista equipo esta vacía equipo.isEmpty.
-            System.out.println("El equipo de Pokémon está vacío");
-
-        } else {
-
-            System.out.println("Selecciona el Pokémon que deseas entrenar:");
-
-            for (int i = 0; i < equipo.size(); i++) { //Complejidad lineal O(N) porque contiene un ciclo for.
-                Pokemon pokemon = equipo.get(i);
-                System.out.println((i + 1) + "." + pokemon.getNombre() + " (Salud: " + pokemon.getSalud() + ", Ataque: " + pokemon.getPuntosDeAtaque() + ")");
-            }
-
-            System.out.print("Selecciona el número del Pokémon a entrenar: ");
-            int numPokemonEntrenar = sc.nextInt() - 1;
-
-            if (numPokemonEntrenar >= 0 && numPokemonEntrenar < equipo.size()) {
-                Pokemon pokemonSeleccionado = equipo.get(numPokemonEntrenar);
-                pokemonSeleccionado.entrenar();
-                System.out.println(pokemonSeleccionado.getNombre() + " ha sido entrenado. salud nueva: " + pokemonSeleccionado.getSalud() + ", ataque nuevo: " + pokemonSeleccionado.getPuntosDeAtaque());
-            } else {
-                System.out.println("Número de Pokémon no válido.");
-            }
-        }
-    }
-// Registrar un nuevo entrenador desde la entrada del usuario
-
-    public static void registrarEntrenador() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("\n--- CREAR NUEVO ENTRENADOR ---");
-        System.out.print("Introduce el nombre del nuevo entrenador: ");
-        String nombre = sc.nextLine();
-
-        Entrenador nuevoEntrenador = new Entrenador(nombre);
-        Entrenador.agregarEntrenador(nuevoEntrenador);
-
-        System.out.println("Entrenador " + nombre + " ha sido creado y añadido a la lista.");
-    }
-
-    private static void verEntrenadores() {
-        if (Entrenador.Vacio()) {
-            System.out.println("No hay entrenadores registrados.");
+        if (entrenadores.size() < 2) {
+            System.out.println(tr("Se necesitan al menos dos entrenadores para iniciar una batalla."));
             return;
         }
 
-        System.out.println("Lista de entrenadores:");
-        for (int i = 0; i < Entrenador.size(); i++) {
-            System.out.println((i + 1) + ". " + Entrenador.get(i).getNombreEntrenador());
-        }
+        System.out.println(tr("Selecciona el primer entrenador:"));
+        verListaEntrenadores();
+        int indexEntrenador1 = sc.nextInt() - 1;
 
-        System.out.print("Selecciona un entrenador por su número: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
+        System.out.println(tr("Selecciona el segundo entrenador:"));
+        verListaEntrenadores();
+        int indexEntrenador2 = sc.nextInt() - 1;
 
-        if (opcion < 1 || opcion > Entrenador.size()) {
-            System.out.println("Opción inválida.");
+        if (indexEntrenador1 >= 0 && indexEntrenador1 < entrenadores.size()
+                && indexEntrenador2 >= 0 && indexEntrenador2 < entrenadores.size()
+                && indexEntrenador1 != indexEntrenador2) {
+            Entrenador entrenador1 = entrenadores.get(indexEntrenador1);
+            Entrenador entrenador2 = entrenadores.get(indexEntrenador2);
+            Batalla batalla = new Batalla(entrenador1, entrenador2);
+            batalla.iniciar();
         } else {
-            Entrenador entrenadorSeleccionado = Entrenador.get(opcion - 1);
-            System.out.println("Entrenador seleccionado: " + entrenadorSeleccionado.getNombreEntrenador());
-
-            // Llamar a otro método para que el entrenador elija un Pokémon
-            seleccionarPokemon(entrenadorSeleccionado);
-        }
-    }
-
-    private static void seleccionarPokemon(Entrenador entrenador) {
-        if (entrenador.getPokemones().isEmpty()) {
-            System.out.println(entrenador.getNombreEntrenador() + " no tiene Pokémones en su equipo.");
-            return;
-        }
-
-        System.out.println("Lista de Pokémon de " + entrenador.getNombreEntrenador() + ":");
-        List<Pokemon> pokemones = entrenador.getPokemones();
-
-        for (int i = 0; i < pokemones.size(); i++) {
-            Pokemon pokemon = pokemones.get(i);
-            System.out.println((i + 1) + ". " + pokemon.getNombre() + " (Nivel: " + pokemon.getNivel() + ")");
-        }
-
-        System.out.print("Selecciona un Pokémon por su número: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
-
-        if (opcion < 1 || opcion > pokemones.size()) {
-            System.out.println("Opción inválida.");
-        } else {
-            Pokemon pokemonSeleccionado = pokemones.get(opcion - 1);
-            System.out.println("Has seleccionado a " + pokemonSeleccionado.getNombre() + " (Nivel: " + pokemonSeleccionado.getNivel() + ").");
-
-            // Aquí puedes realizar más operaciones con el Pokémon seleccionado
+            System.out.println(tr("Selección de entrenadores no válida."));
         }
     }
 
     // Método para seleccionar idioma
     private static void seleccionarIdioma() {
-        System.out.println("1. Español"); // O(1)
-        System.out.println("2. English"); // O(1)
-        System.out.print("Selecciona tu idioma / Select your language: "); // O(1)
-        int opcion = sc.nextInt(); // O(1)
+        System.out.println("1. Español");
+        System.out.println("2. English");
+        System.out.print("Selecciona tu idioma / Select your language: ");
+        int opcion = sc.nextInt();
         if (opcion == 1) {
-            idioma = "español"; // O(1)
+            idioma = "español";
         } else if (opcion == 2) {
-            idioma = "english"; // O(1)
+            idioma = "english";
         } else {
-            System.out.println(tr("Opción no válida. Manteniendo el idioma actual.")); // O(1)
+            System.out.println(tr("Opción no válida. Manteniendo el idioma actual."));
         }
     }
-
     // Método para traducir textos
+
+// Método para traducir textos
     private static String tr(String texto) {
-        switch (idioma) { // O(1), dado que solo compara con un número limitado de opciones.
+        switch (idioma) {
             case "english":
-                return traducirIngles(texto); // O(1), asume que la traducción directa en el switch es constante.
+                return traducirIngles(texto);
             default:
-                return texto; // O(1)
+                return texto;
         }
     }
 
-    // Traducciones al inglés
+// Traducciones al inglés
     private static String traducirIngles(String texto) {
-        switch (texto) { // O(1), dado que compara con un número limitado de textos.
-            // Casos específicos (cada uno: O(1))
+        switch (texto) {
             case "Bienvenido al simulador de batallas Pokémon":
                 return "Welcome to the Pokémon Battle Simulator";
             case "Gestionar Entrenadores":
@@ -382,8 +265,8 @@ public class Principal {
                 return "Exit";
             case "Elige una opción: ":
                 return "Choose an option: ";
-            case "Opción no válida. Intenta nuevamente.":
-                return "Invalid option. Try again.";
+            case "Opción no válida. Intenta nuevamente. ":
+                return "Invalid option. Try again. ";
             case "Cerrando el juego...":
                 return "Closing the game...";
             case "Registrar nuevo entrenador":
@@ -408,9 +291,22 @@ public class Principal {
                 return "Select trainer two's Pokémon";
             case "Comenzar Batalla":
                 return "Start Battle";
+            case "No hay entrenadores registrados.":
+                return "No trainers registered.";
+            case "Pokémon registrado con éxito.":
+                return "Pokémon registered successfully.";
+            case "No hay Pokémon registrados.":
+                return "No Pokémon registered.";
+            case "Selecciona el entrenador para el Pokémon:":
+                return "Select the trainer for the Pokémon:";
+            case "Entrenador no válido.":
+                return "Invalid trainer.";
+            case "Se necesitan al menos dos entrenadores para iniciar una batalla.":
+                return "At least two trainers are needed to start a battle.";
+            case "Selección de entrenadores no válida.":
+                return "Invalid trainer selection.";
             default:
                 return texto;
         }
     }
-
 }
