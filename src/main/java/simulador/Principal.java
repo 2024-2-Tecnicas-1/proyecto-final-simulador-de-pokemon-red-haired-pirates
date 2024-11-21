@@ -28,7 +28,8 @@ public class Principal {
                 System.out.println("2. " + tr("Gestionar Pokémones"));
                 System.out.println("3. " + tr("Iniciar Batalla"));
                 System.out.println("4. " + tr("Seleccionar Idioma"));
-                System.out.println("5. " + tr("Salir"));
+                System.out.println("5. " + tr("Gestionar Clínica Pokémon"));
+                System.out.println("6. " + tr("Salir"));
                 System.out.print(tr("Elige una opción: "));
                 int opcion = sc.nextInt();
                 switch (opcion) {
@@ -45,6 +46,9 @@ public class Principal {
                         seleccionarIdioma();
                         break;
                     case 5:
+                        gestionarClinica();
+                        break;
+                    case 6:
                         System.out.println(tr("Cerrando el juego..."));
                         return;
                     default:
@@ -202,26 +206,45 @@ public class Principal {
                 System.out.println(tr("Se necesitan al menos dos entrenadores para iniciar una batalla."));
                 return;
             }
-    
+        
+            // Seleccionar el primer entrenador
             System.out.println(tr("Selecciona el primer entrenador:"));
             verListaEntrenadores();
             int indexEntrenador1 = sc.nextInt() - 1;
-    
+        
+            // Seleccionar el segundo entrenador
             System.out.println(tr("Selecciona el segundo entrenador:"));
             verListaEntrenadores();
             int indexEntrenador2 = sc.nextInt() - 1;
-    
+        
+            // Validar selección de entrenadores
             if (indexEntrenador1 >= 0 && indexEntrenador1 < entrenadores.size()
                     && indexEntrenador2 >= 0 && indexEntrenador2 < entrenadores.size()
                     && indexEntrenador1 != indexEntrenador2) {
+        
+                // Obtener los entrenadores seleccionados
                 Entrenador entrenador1 = entrenadores.get(indexEntrenador1);
                 Entrenador entrenador2 = entrenadores.get(indexEntrenador2);
-                Batalla batalla = new Batalla(entrenador1, entrenador2);
+        
+                // Seleccionar los Pokémon para la batalla
+                Pokemon pokemon1 = entrenador1.prepararBatalla();
+                Pokemon pokemon2 = entrenador2.prepararBatalla();
+        
+                // Validar si ambos entrenadores tienen Pokémon disponibles
+                if (pokemon1 == null || pokemon2 == null) {
+                    System.out.println(tr("Ambos entrenadores deben tener al menos un Pokémon para combatir."));
+                    return;
+                }
+        
+                // Crear la batalla e iniciarla
+                Batalla batalla = new Batalla();
                 batalla.iniciarBatalla(pokemon1, pokemon2);
             } else {
                 System.out.println(tr("Selección de entrenadores no válida."));
             }
         }
+        
+
         private static void gestionarClinica() {
             while (true) {
                 System.out.println("1. Ingresar Paciente");

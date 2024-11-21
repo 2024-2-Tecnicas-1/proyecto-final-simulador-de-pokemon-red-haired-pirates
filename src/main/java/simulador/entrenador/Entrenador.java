@@ -9,8 +9,6 @@ public class Entrenador {
 
 
     private String nombreEntrenador;
-    // Guarda del nombre entrenador
-    private static Entrenador entrenador;
     private List<Pokemon> pokemones;
     private static List<Entrenador> listaEntrenador = new ArrayList<>();
 
@@ -78,9 +76,8 @@ public class Entrenador {
     public void mostrarPokemones() {
         if (pokemones.isEmpty()) {
             System.out.println("No tienes Pokémones en tu equipo.");
-        } else {
-            String nombreEntrenador = null;
-            System.out.println("Pokémones de " + nombreEntrenador + ":");
+        } else {       
+            System.out.println("Pokémones de " + this.nombreEntrenador + ":");
 
             // Un bucle para todos los elementos de la lista pokemones, imprime el nombre y el nivel de cada Pokemon.
             for (Pokemon pokemon : pokemones) {
