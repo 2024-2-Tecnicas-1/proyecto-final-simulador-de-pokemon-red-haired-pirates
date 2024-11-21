@@ -4,25 +4,26 @@ import simulador.pokemon.Pokemon;
 
 public class Batalla {
 
-    /**
-    * Atributos.
+    /*
+    * Atributos en órden alfabético.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
+
+    private boolean seguir; 
+    private int turnoActual;
     private Pokemon pokemon1;
     private Pokemon pokemon2;
-    private int turnoActual;
-    private boolean seguir; 
-
-     /*
-    * turnoActual: Número de turno que lleva la batalla.
-    * atacante: Pokémon que realiza el daño.
-    * defensor: Pokémon que recibe el daño.
+    
+     /*  
     * seguir: Booleano para poder detener el turno o continuarlo.
+    * turnoActual: Número de turno que lleva la batalla.
+    * pokemon1: Pokémon que realiza el daño.
+    * pokemon2: Pokémon que recibe el daño.
     */
 
 
 
-    /**
+    /*
     * Método para iniciar la batalla y asignación de los atributos.
     * Complejidad temporal: O(1) Complejidad Constante.
     */ 

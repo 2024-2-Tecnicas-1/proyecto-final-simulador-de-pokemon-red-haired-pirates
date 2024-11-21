@@ -202,6 +202,7 @@ public class Principal {
     
         // Método para iniciar batalla
         private static void iniciarBatalla() {
+            //Verifica que haya al menos dos entrenadores registrados en la lista entrenadores.
             if (entrenadores.size() < 2) {
                 System.out.println(tr("Se necesitan al menos dos entrenadores para iniciar una batalla."));
                 return;
@@ -209,8 +210,8 @@ public class Principal {
         
             // Seleccionar el primer entrenador
             System.out.println(tr("Selecciona el primer entrenador:"));
-            verListaEntrenadores();
-            int indexEntrenador1 = sc.nextInt() - 1;
+            verListaEntrenadores(); //muestra todos los entrenadores posibles
+            int indexEntrenador1 = sc.nextInt() - 1; //se resta uno por lo que las listas comienzan desde 0
         
             // Seleccionar el segundo entrenador
             System.out.println(tr("Selecciona el segundo entrenador:"));
@@ -219,11 +220,12 @@ public class Principal {
         
             // Validar selección de entrenadores
             if (indexEntrenador1 >= 0 && indexEntrenador1 < entrenadores.size()
-                    && indexEntrenador2 >= 0 && indexEntrenador2 < entrenadores.size()
-                    && indexEntrenador1 != indexEntrenador2) {
+                    && indexEntrenador2 >= 0 && indexEntrenador2 < entrenadores.size()//Ambos índices están dentro del rango válido de la lista entrenadores.
+                    && indexEntrenador1 != indexEntrenador2) //Entrenadores diferentes
+                    { 
         
                 // Obtener los entrenadores seleccionados
-                Entrenador entrenador1 = entrenadores.get(indexEntrenador1);
+                Entrenador entrenador1 = entrenadores.get(indexEntrenador1); 
                 Entrenador entrenador2 = entrenadores.get(indexEntrenador2);
         
                 // Seleccionar los Pokémon para la batalla

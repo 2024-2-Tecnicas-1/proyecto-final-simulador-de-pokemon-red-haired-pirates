@@ -2,18 +2,18 @@ package simulador.pokemon;
 public abstract class Pokemon {
     
     /**
-    * Atributos.
+    * Atributos en orden alfabético.
     * Complejidad temporal: O(1) Complejidad Constante.
     */
     
-    private String nombre;
-    private int saludInicial;
-    private int salud;
-    private int puntosDeAtaque;
-    private TipoPokemon tipoPokemon;
     private Estado estado;
-    private int nivel;
     private int experiencia;
+    private int nivel;
+    private int puntosDeAtaque;
+    private String nombre;
+    private int salud;
+    private int saludInicial;
+    private TipoPokemon tipoPokemon;
     
     /*
     * nombre: El nombre del Pokémon.
@@ -44,6 +44,7 @@ public abstract class Pokemon {
     }
 
     
+    //Métodos en orden alfabético.
     
     
     /*
@@ -61,8 +62,44 @@ public abstract class Pokemon {
     //Realiza un ataque al oponente, teniendo en cuenta las ventajas y desventajas de cada tipo.
     
     
-    
+
+    /*   
+    * Método que restablece la vida del pokemon.
+    * Complejidad temporal: O(1) Complejidad Constante.
+    */
+    public void curar(){
+        this.salud = this.saludInicial;
+    }
       
+
+    /*   
+    * Método para entrenar a los pokemones. 
+    * Complejidad temporal: O(1) Complejidad Constante.
+    */
+
+    public void entrenar() {
+        this.puntosDeAtaque += 5;
+        this.salud += 10;
+    }
+
+    //Mejora las estadísticas del Pokémon.
+
+
+
+
+    /*   
+    * Método que acumula los puntos de experiencia del pokemon.
+    * Complejidad temporal: O(1) Complejidad Constante.
+    */
+    public void ganarExperiencia(int puntos) {
+        experiencia += puntos; 
+        //Verifica si llega al límite de experiencia para aumentar de nivel y por cada nivel que va subiendo se multiplica por 50 la cantidad de experiencia que necesita
+        if (experiencia >= nivel * 50) { 
+            subirDeNivel();  // Si se alcanza el umbral, sube el nivel del Pokémon.
+        }
+        }
+
+
     /*
     * Método que recibe el daño del pokemon oponente.
     * Complejidad temporal: O(1) Complejidad Constante.
@@ -76,34 +113,6 @@ public abstract class Pokemon {
         }
     }
     //Reduce la salud del Pokémon basado en el daño recibido.
-
-    
-    
-    /*   
-    * Método para entrenar a los pokemones. 
-    * Complejidad temporal: O(1) Complejidad Constante.
-    */
-
-    public void entrenar() {
-        this.puntosDeAtaque += 5;
-        this.salud += 10;
-    }
-
-    //Mejora las estadísticas del Pokémon.
-
-    
-    
-    /*   
-    * Método que acumula los puntos de experiencia del pokemon.
-    * Complejidad temporal: O(1) Complejidad Constante.
-    */
-    public void ganarExperiencia(int puntos) {
-    experiencia += puntos; 
-    //Verifica si llega al límite de experiencia para aumentar de nivel y por cada nivel que va subiendo se multiplica por 50 la cantidad de experiencia que necesita
-    if (experiencia >= nivel * 50) { 
-        subirDeNivel();  // Si se alcanza el umbral, sube el nivel del Pokémon.
-    }
-    }
   
     
     
@@ -119,15 +128,6 @@ public abstract class Pokemon {
     //El doble de lo que ganan entrenando
     System.out.println(nombre+" ha subido al nivel "+nivel);
     }    
-    
-    
-    public void curar(){
-        this.salud = this.saludInicial;
-    }
-    
-    
-    
-    
     
     
     
@@ -164,36 +164,16 @@ public abstract class Pokemon {
     }
 
     /*   
-    * Métodos setter.
+    * Métodos setter usados.
     * Complejidad temporal: O(1) Complejidad Constante.
-    */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setSalud(int salud) {
-        this.salud = salud;
-    }
-
-    public void setPuntosDeAtaque(int puntosDeAtaque) {
-        this.puntosDeAtaque = puntosDeAtaque;
-    }
-
-    public void setTipoPokemon(TipoPokemon tipoPokemon) {
-        this.tipoPokemon = tipoPokemon;
-    }
+    */ 
 
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
     
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
 }
