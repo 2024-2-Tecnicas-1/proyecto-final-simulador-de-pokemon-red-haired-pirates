@@ -217,7 +217,7 @@ public class Principal {
                 Entrenador entrenador1 = entrenadores.get(indexEntrenador1);
                 Entrenador entrenador2 = entrenadores.get(indexEntrenador2);
                 Batalla batalla = new Batalla(entrenador1, entrenador2);
-                batalla.iniciar();
+                batalla.iniciarBatalla(pokemon1, pokemon2);
             } else {
                 System.out.println(tr("Selección de entrenadores no válida."));
             }
