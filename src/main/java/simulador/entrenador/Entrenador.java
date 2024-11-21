@@ -81,13 +81,6 @@ public class Entrenador {
         for (Pokemon pokemon : pokemones) {
             System.out.println(pokemon.getNombre() + " - Nivel: " + pokemon.getNivel());
 
-            // Preguntar si quiere ver los stats del Pokémon
-            System.out.println("¿Quieres ver los stats de " + pokemon.getNombre() + "? (1 para sí, 0 para no): ");
-            int opcion = sc.nextInt();
-
-            if (opcion == 1) {
-                pokemon.mostrarStats();  // Llamar al método mostrarStats del Pokémon
-            }
         }
     }
 }
