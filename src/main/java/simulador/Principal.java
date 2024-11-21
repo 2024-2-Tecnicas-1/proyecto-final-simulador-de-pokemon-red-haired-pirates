@@ -275,6 +275,18 @@ public class Principal {
             }
         }
     }
+    //Se muestra los stats de los pokemones osea sus estadisticas
+    public void mostrarStats() {
+    System.out.println("Nombre: " + nombre);
+    System.out.println("Salud Inicial: " + saludInicial);
+    System.out.println("Salud Actual: " + salud);
+    System.out.println("Puntos de Ataque: " + puntosDeAtaque);
+    System.out.println("Tipo: " + tipoPokemon);
+    System.out.println("Estado: " + estado);
+    System.out.println("Nivel: " + nivel);
+    System.out.println("Experiencia: " + experiencia);
+}
+    
 
     // Método para seleccionar idioma
     private static void seleccionarIdioma() {
