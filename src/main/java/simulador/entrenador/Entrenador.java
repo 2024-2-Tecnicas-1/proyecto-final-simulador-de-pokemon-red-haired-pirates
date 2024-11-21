@@ -73,18 +73,24 @@ public class Entrenador {
     }
 
     // Método que muestra la lista de los pokemones actuales de Entrenador junto a su nivel.
-    public void mostrarPokemones() {
-        if (pokemones.isEmpty()) {
-            System.out.println("No tienes Pokémones en tu equipo.");
-        } else {       
-            System.out.println("Pokémones de " + this.nombreEntrenador + ":");
+  public void mostrarPokemones() {
+    if (pokemones.isEmpty()) {
+        System.out.println("No tienes Pokémones en tu equipo.");
+    } else {
+        System.out.println("Pokémones de " + nombreEntrenador + ":");
+        for (Pokemon pokemon : pokemones) {
+            System.out.println(pokemon.getNombre() + " - Nivel: " + pokemon.getNivel());
 
-            // Un bucle para todos los elementos de la lista pokemones, imprime el nombre y el nivel de cada Pokemon.
-            for (Pokemon pokemon : pokemones) {
-                System.out.println(pokemon.getNombre() + " - Nivel: " + pokemon.getNivel());
+            // Preguntar si quiere ver los stats del Pokémon
+            System.out.println("¿Quieres ver los stats de " + pokemon.getNombre() + "? (1 para sí, 0 para no): ");
+            int opcion = sc.nextInt();
+
+            if (opcion == 1) {
+                pokemon.mostrarStats();  // Llamar al método mostrarStats del Pokémon
             }
         }
     }
+}
 
     // Método que prepara al pokémon para una batalla.
     public Pokemon prepararBatalla() {
